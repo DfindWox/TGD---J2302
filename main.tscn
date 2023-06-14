@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://do7w7uen2kgw4"]
+[gd_scene load_steps=3 format=3 uid="uid://do7w7uen2kgw4"]
+
+[ext_resource type="PackedScene" uid="uid://c4golxl7jjfyi" path="res://Classes/base_entity.tscn" id="1_thsby"]
+[ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Scenes/Maps/map.tscn" id="2_yd2rw"]
 
 [node name="Main" type="Node2D"]
+
+[node name="BaseEntity" parent="." instance=ExtResource("1_thsby")]
+position = Vector2(120, 75)
+
+[node name="Map" parent="." instance=ExtResource("2_yd2rw")]
