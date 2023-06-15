@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d6i8j616fbif"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_6y7de"]
+[ext_resource type="Texture2D" uid="uid://hyrdd0oaoyll" path="res://Sprites/ship_1.png" id="2_dem4f"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_6y7de")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_dem4f")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+position = Vector2(-0.0963593, 4.82411)
