@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-var speed = 200
+@export var speed = 240
+@onready var parring = $ParryTimer
+var parying:bool = true
 const bullet = preload("res://Prefabs/bullet.tscn")
 
 func _process(delta: float) -> void:
@@ -25,6 +27,12 @@ func _physics_process(delta):
 		if collision.get_collider().is_in_group("enemies"):
 			queue_free()
 	
+func parry():
+	print('parry activated')
+	#change collision
+	parring.start()
+	parying = true
+
 func shoot() -> void:
 	if Input.is_action_pressed("shoot"):
 		if($Timer.is_stopped()):
@@ -33,3 +41,7 @@ func shoot() -> void:
 			get_tree().current_scene.add_child(GrabedInstance)
 			GrabedInstance.global_position = self.global_position
 			GrabedInstance.global_position.y = self.global_position.y - 50
+
+
+func _on_parry_timer_timeout():
+	parying = false

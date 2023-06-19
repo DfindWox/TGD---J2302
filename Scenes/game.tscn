@@ -32,6 +32,7 @@ position = Vector2(250, 900)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("2_ojx57")
+speed = 500
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("3_un6ch")
@@ -42,6 +43,8 @@ shape = SubResource("CapsuleShape2D_bqrnj")
 [node name="Timer" type="Timer" parent="Player"]
 wait_time = 0.2
 one_shot = true
+
+[node name="ParryTimer" type="Timer" parent="Player"]
 
 [node name="Bg" type="ParallaxBackground" parent="."]
 script = ExtResource("6_2mib4")
@@ -95,3 +98,5 @@ script = ExtResource("7_5obvl")
 
 [node name="Timer" type="Timer" parent="Spawn"]
 one_shot = true
+
+[connection signal="timeout" from="Player/ParryTimer" to="Player" method="_on_parry_timer_timeout"]
