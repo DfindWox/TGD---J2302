@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://do7w7uen2kgw4"]
 
 [ext_resource type="PackedScene" uid="uid://c4golxl7jjfyi" path="res://Classes/base_entity.tscn" id="1_thsby"]
-[ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Scenes/Maps/map.tscn" id="2_yd2rw"]
+[ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Scenes/WorldBoundary.tscn" id="2_s42s0"]
 
 [node name="Main" type="Node2D"]
 
 [node name="BaseEntity" parent="." instance=ExtResource("1_thsby")]
-position = Vector2(120, 75)
+position = Vector2(109, 267)
 
-[node name="Map" parent="." instance=ExtResource("2_yd2rw")]
+[node name="WorldBoundary" parent="." instance=ExtResource("2_s42s0")]

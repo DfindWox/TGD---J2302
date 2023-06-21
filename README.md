@@ -1,2 +1,2 @@
 # TGD-J2302
- Uhuh
+ Will be worked on soon: Rework some bullet code, parry  
