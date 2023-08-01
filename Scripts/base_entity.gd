@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 
 @export var speed = 300.0
+@export var life = 1
 
+func _physics_process(_delta):
+	pass
 
-func _physics_process(delta):
-
-	var input_vector = Vector2(
-		Input.get_axis("ui_left", "ui_right"),
-		Input.get_axis("ui_up", "ui_down")
-	).normalized()
-	velocity = input_vector * speed
-	move_and_slide()
+func take_damage():
+	life =-1
+	if life <=0:
+		print('morri, minha life: ', life)
+		self.queue_free()

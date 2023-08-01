@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://do7w7uen2kgw4"]
+[gd_scene load_steps=4 format=3 uid="uid://do7w7uen2kgw4"]
 
-[ext_resource type="PackedScene" uid="uid://c4golxl7jjfyi" path="res://Classes/base_entity.tscn" id="1_thsby"]
 [ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Scenes/WorldBoundary.tscn" id="2_s42s0"]
+[ext_resource type="PackedScene" uid="uid://cakvwe58rleq2" path="res://Classes/base_shooter_enemy.tscn" id="3_qnq37"]
+[ext_resource type="PackedScene" uid="uid://c0xvtfrbwqtkk" path="res://Scenes/player.tscn" id="4_36o1q"]
 
 [node name="Main" type="Node2D"]
 
-[node name="BaseEntity" parent="." instance=ExtResource("1_thsby")]
-position = Vector2(109, 267)
-
 [node name="WorldBoundary" parent="." instance=ExtResource("2_s42s0")]
+
+[node name="BaseShooterEnemy" parent="." instance=ExtResource("3_qnq37")]
+position = Vector2(491, 267)
+
+[node name="Player" parent="." instance=ExtResource("4_36o1q")]
+position = Vector2(30, 270)

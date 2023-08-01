@@ -1,9 +1,11 @@
 extends "res://Scripts/base_entity.gd"
-@export var Bullet: PackedScene
+@export var bullet: PackedScene
 var target:bool = false
 
 func shoot():
-	var s = Bullet.instantiate()
+	var s = bullet.instantiate()
+	s.direction = Vector2(-1, 0)
+	s.own = 'enemy'
 	owner.call_deferred("add_child", s)
 	s.transform = $Marker.global_transform
 
@@ -14,6 +16,7 @@ func _on_timer_timeout():
 
 
 func _on_radar_body_entered(body):
+	print(body)
 	if body.is_in_group('Player'):
 		target = true
 		shoot()
@@ -22,3 +25,5 @@ func _on_radar_body_entered(body):
 func _on_radar_body_exited(body):
 	if body.is_in_group('Player'):
 		target = false
+
+

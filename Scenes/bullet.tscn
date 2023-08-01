@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2hpuumh3akos"]
+
+[sub_resource type="GDScript" id="GDScript_kxc84"]
+script/source = "extends CharacterBody2D
+
+
+@export var speed:int = 400
+var  direction:Vector2 = Vector2(1,0)
+var own = 'Player'
+
+func _physics_process(_delta):
+	velocity = direction.normalized() * speed
+	move_and_slide()
+
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group(own):
+		return
+	if body.has_method(\"take_damage\"):
+		body.take_damage()
+	self.queue_free()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_socnw"]
+radius = 11.4018
+
+[node name="Bullet" type="CharacterBody2D" groups=["bullet"]]
+script = SubResource("GDScript_kxc84")
+
+[node name="Area2D" type="Area2D" parent="." groups=["bullet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["bullet"]]
+shape = SubResource("CircleShape2D_socnw")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

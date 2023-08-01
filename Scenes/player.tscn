@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0xvtfrbwqtkk"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_kmbgp"]
+[ext_resource type="Texture2D" uid="uid://75f8kxjjyac0" path="res://Sprites/ship_4.png" id="2_jjkdm"]
+[ext_resource type="PackedScene" uid="uid://c2hpuumh3akos" path="res://Scenes/bullet.tscn" id="2_pn2qm"]
+[ext_resource type="PackedScene" uid="uid://cp8y0mkwjguvw" path="res://Classes/hurt_box.tscn" id="3_j7trl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d2yxi"]
+radius = 16.1245
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_efixp"]
+radius = 19.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_kmbgp")
+speed = 500
+bullet = ExtResource("2_pn2qm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Player"]]
+rotation = 1.5708
+texture = ExtResource("2_jjkdm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
+shape = SubResource("CircleShape2D_d2yxi")
+
+[node name="Timer" type="Timer" parent="." groups=["Player"]]
+wait_time = 0.2
+one_shot = true
+
+[node name="ParryTimer" type="Timer" parent="." groups=["Player"]]
+wait_time = 0.4
+
+[node name="HurtBox" parent="." instance=ExtResource("3_j7trl")]
+
+[node name="ParryArea" type="Area2D" parent="."]
+rotation = -0.00783381
+scale = Vector2(1.63998, 1.60186)
+priority = 2.0
+
+[node name="Collision" type="CollisionShape2D" parent="ParryArea"]
+shape = SubResource("CircleShape2D_efixp")
+disabled = true
+debug_color = Color(0, 0.65098, 0.0392157, 0.419608)
+
+[connection signal="timeout" from="ParryTimer" to="." method="_on_parry_timer_timeout"]
+[connection signal="area_entered" from="ParryArea" to="." method="_on_parry_area_area_entered"]

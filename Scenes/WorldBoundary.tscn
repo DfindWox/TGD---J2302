@@ -18,11 +18,11 @@ gravity_scale = 0.0
 shape = SubResource("WorldBoundaryShape2D_swggf")
 
 [node name="DownBorder" type="CollisionShape2D" parent="."]
-position = Vector2(95, 540)
+position = Vector2(95, 565)
 shape = SubResource("WorldBoundaryShape2D_nkn7j")
 
 [node name="LeftBorder2" type="CollisionShape2D" parent="."]
-position = Vector2(960, 0)
+position = Vector2(970, 0)
 shape = SubResource("WorldBoundaryShape2D_tof5l")
 
 [node name="UpBorder" type="CollisionShape2D" parent="."]

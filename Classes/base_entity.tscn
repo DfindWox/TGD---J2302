@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/base_entity.gd" id="1_lpgg2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmy4b"]
-radius = 15.1327
+radius = 8.0
 
 [node name="BaseEntity" type="CharacterBody2D"]
 script = ExtResource("1_lpgg2")

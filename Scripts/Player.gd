@@ -1,37 +1,56 @@
 extends CharacterBody2D
 
+@export var life = 2
+@export var acceleration = 0.1
+@export var des_acc_mod = 2
 @export var speed = 240
 @onready var parring = $ParryTimer
+var motion = Vector2()
 var parying:bool = true
-const bullet = preload("res://Prefabs/bullet.tscn")
+@export var bullet: PackedScene
 
-func _process(delta: float) -> void:
-	velocity = Vector2()
+func take_damage():
+	life -= 1
+	if life <=0:
+		print('morri, minha life: ', life)
+		get_tree().reload_current_scene()
 
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1 
-		
-	shoot()
 	
 func _physics_process(delta):
-	velocity = velocity.normalized() * speed
+	if Input.is_action_pressed("ui_right"):
+		motion.x = min(motion.x + acceleration * delta, speed)
+	elif Input.is_action_pressed("ui_left"):
+		motion.x = max(motion.x - acceleration * delta, -speed)
+	else:
+		if motion.x > 0:
+			motion.x = max(motion.x - acceleration *des_acc_mod* delta, 0)
+		if motion.x < 0:
+			motion.x = min(motion.x + acceleration *des_acc_mod* delta, 0)
+#		if motion.x > 5 or motion.x < 5:
+#			motion.x = 0
+	if Input.is_action_pressed("ui_up"):
+		motion.y = max(motion.y - acceleration * delta, -speed)
+	elif Input.is_action_pressed("ui_down"):
+		motion.y = min(motion.y + acceleration * delta, speed)
+	
+
+	velocity = motion.normalized() * speed
+	print(velocity)
 	move_and_slide()
+
+	parry()
+	shoot()
+
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		if collision.get_collider().is_in_group("enemies"):
 			queue_free()
 	
 func parry():
-	print('parry activated')
-	#change collision
-	parring.start()
-	parying = true
+	if Input.is_action_pressed("Parry"):
+		parring.start()
+		$ParryArea/Collision.disabled = false
+		parying = true
 
 func shoot() -> void:
 	if Input.is_action_pressed("shoot"):
@@ -40,8 +59,15 @@ func shoot() -> void:
 			var GrabedInstance = bullet.instantiate()
 			get_tree().current_scene.add_child(GrabedInstance)
 			GrabedInstance.global_position = self.global_position
-			GrabedInstance.global_position.y = self.global_position.y - 50
+			GrabedInstance.global_position.x = self.global_position.x + 50
 
 
 func _on_parry_timer_timeout():
+	$ParryArea/Collision.disabled = true
 	parying = false
+
+
+func _on_parry_area_area_entered(area):
+	print('parry achou: ', area)
+	if area.is_in_group('bullet'):
+		area.queue_free()
