@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var life = 2
-@export var acceleration = 0.1
+@export var acceleration = 1.1
 @export var des_acc_mod = 2
 @export var speed = 240
 @onready var parring = $ParryTimer
@@ -26,16 +26,19 @@ func _physics_process(delta):
 			motion.x = max(motion.x - acceleration *des_acc_mod* delta, 0)
 		if motion.x < 0:
 			motion.x = min(motion.x + acceleration *des_acc_mod* delta, 0)
-#		if motion.x > 5 or motion.x < 5:
-#			motion.x = 0
+
 	if Input.is_action_pressed("ui_up"):
 		motion.y = max(motion.y - acceleration * delta, -speed)
 	elif Input.is_action_pressed("ui_down"):
 		motion.y = min(motion.y + acceleration * delta, speed)
+	else:
+		if motion.y > 0:
+			motion.y = max(motion.y - acceleration * delta * des_acc_mod, 0)
+		if motion.y < 0:
+			motion.y = min(motion.y + acceleration * delta * des_acc_mod, 0) 
 	
 
-	velocity = motion.normalized() * speed
-	print(velocity)
+	velocity = motion * speed
 	move_and_slide()
 
 	parry()

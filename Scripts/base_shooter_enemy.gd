@@ -16,7 +16,6 @@ func _on_timer_timeout():
 
 
 func _on_radar_body_entered(body):
-	print(body)
 	if body.is_in_group('Player'):
 		target = true
 		shoot()
