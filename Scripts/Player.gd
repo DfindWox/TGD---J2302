@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var life = 2
 @export var acceleration = 1.1
-@export var des_acc_mod = 2
+@export var des_acc_mod = 2 #desacceleration modifier
 @export var speed = 240
 @onready var parring = $ParryTimer
 var motion = Vector2()
@@ -17,6 +17,16 @@ func take_damage():
 
 	
 func _physics_process(delta):
+	move(delta)
+	parry()
+	shoot()
+
+func move(delta):
+	#rewrite that
+#	var motion = Vector2(
+#		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+#		Input.get_action_strength("ui_down")  - Input.get_action_strength("ui_up")
+#	).normalized()
 	if Input.is_action_pressed("ui_right"):
 		motion.x = min(motion.x + acceleration * delta, speed)
 	elif Input.is_action_pressed("ui_left"):
@@ -41,14 +51,6 @@ func _physics_process(delta):
 	velocity = motion * speed
 	move_and_slide()
 
-	parry()
-	shoot()
-
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().is_in_group("enemies"):
-			queue_free()
-	
 func parry():
 	if Input.is_action_pressed("Parry"):
 		parring.start()

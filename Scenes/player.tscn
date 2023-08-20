@@ -13,6 +13,7 @@ radius = 19.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_kmbgp")
+des_acc_mod = 1
 speed = 500
 bullet = ExtResource("2_pn2qm")
 
