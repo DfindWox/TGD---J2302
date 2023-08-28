@@ -1,16 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://d6i8j616fbif"]
+[gd_scene load_steps=11 format=3 uid="uid://d6i8j616fbif"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_6y7de"]
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="2_ojx57"]
-[ext_resource type="Texture2D" uid="uid://75f8kxjjyac0" path="res://Sprites/ship_4.png" id="3_un6ch"]
+[ext_resource type="PackedScene" uid="uid://c7uh2kt5rldlt" path="res://Scenes/player.tscn" id="2_nbuqf"]
 [ext_resource type="Script" path="res://Scripts/Bg.gd" id="6_2mib4"]
 [ext_resource type="Texture2D" uid="uid://gned3djrs4bt" path="res://Sprites/Condesed/Starry background  - Layer 01 - Void.png" id="6_41afn"]
 [ext_resource type="Script" path="res://Scripts/Spawn.gd" id="7_5obvl"]
 [ext_resource type="Texture2D" uid="uid://dhvnmw4ykg0ta" path="res://Sprites/Condesed/Starry background  - Layer 02 - Stars.png" id="7_yuggk"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bqrnj"]
-radius = 19.0
-height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wmux"]
 size = Vector2(4, 960)
@@ -27,24 +22,7 @@ size = Vector2(3, 549)
 [node name="Game" type="Node2D"]
 script = ExtResource("1_6y7de")
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(250, 900)
-collision_layer = 2
-collision_mask = 3
-script = ExtResource("2_ojx57")
-speed = 500
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture = ExtResource("3_un6ch")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CapsuleShape2D_bqrnj")
-
-[node name="Timer" type="Timer" parent="Player"]
-wait_time = 0.2
-one_shot = true
-
-[node name="ParryTimer" type="Timer" parent="Player"]
+[node name="Player" parent="." instance=ExtResource("2_nbuqf")]
 
 [node name="Bg" type="ParallaxBackground" parent="."]
 script = ExtResource("6_2mib4")
@@ -98,5 +76,3 @@ script = ExtResource("7_5obvl")
 
 [node name="Timer" type="Timer" parent="Spawn"]
 one_shot = true
-
-[connection signal="timeout" from="Player/ParryTimer" to="Player" method="_on_parry_timer_timeout"]
