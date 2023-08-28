@@ -11,18 +11,19 @@ signal life_changed ## Emitido quando o jogador perde/ganha vida.
 @export var parry_time := 0.4 ## Tempo em que o parry fica ativo.
 @export var parry_delay := 0.4 ## Tempo que o jogador precisa esperar para reativar o parry.
 @export var bullet : PackedScene ## Cena da bala que a nave atira.
+@export var shoot_delay := 0.3 ## Intervalo entre tiros.
 
 var is_active := true ## Define se a nave está ativa e pode receber comandos do jogador.
 var can_parry := true ## Emitido quando o jogador morre.
 
 @onready var parry_shape := $ParryArea/Collision as CollisionShape2D ## [CollisionShape2D] responsável pelo parry.
-@onready var shoot_delay := $ShootDelay as Timer ## [Timer] que determina o tempo entre tiros.
+@onready var shoot_delay_timer := $ShootDelay as Timer ## [Timer] que determina o tempo entre tiros.
 @onready var shoot_point := $ShootPoint as Marker2D ## [Marker2D] que indica de onde saem os tiros.
 
 
 # Funções básicas
 func _ready() -> void:
-	pass
+	shoot_delay_timer.wait_time = shoot_delay
 
 
 func _physics_process(delta: float) -> void:
@@ -75,11 +76,11 @@ func _parry() -> void:
 
 
 func _shoot() -> void:
-	if shoot_delay.is_stopped():
+	if shoot_delay_timer.is_stopped():
 		var b := bullet.instantiate()
 		get_tree().current_scene.add_child(b)
 		b.global_position = shoot_point.global_position
-		shoot_delay.start()
+		shoot_delay_timer.start()
 
 
 func _die() -> void:
