@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_e7vip"]
 [ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Scenes/WorldBoundary.tscn" id="2_s42s0"]
 [ext_resource type="PackedScene" uid="uid://cakvwe58rleq2" path="res://Classes/base_shooter_enemy.tscn" id="3_qnq37"]
-[ext_resource type="PackedScene" uid="uid://c0xvtfrbwqtkk" path="res://Scenes/player.tscn" id="4_36o1q"]
+[ext_resource type="PackedScene" uid="uid://c7uh2kt5rldlt" path="res://Scenes/player.tscn" id="4_ao0l0"]
 [ext_resource type="PackedScene" uid="uid://sv26t4bdy5le" path="res://Scenes/bg.tscn" id="5_780ur"]
 
 [node name="Main" type="Node2D"]
@@ -14,11 +14,10 @@ script = ExtResource("1_e7vip")
 [node name="BaseShooterEnemy" parent="." instance=ExtResource("3_qnq37")]
 position = Vector2(491, 267)
 
-[node name="Player" parent="." instance=ExtResource("4_36o1q")]
+[node name="PlayerNew" parent="." instance=ExtResource("4_ao0l0")]
 position = Vector2(30, 270)
-des_acc_mod = 2
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="PlayerNew"]
 
 [node name="TextEdit" type="TextEdit" parent="."]
 offset_right = 129.0
