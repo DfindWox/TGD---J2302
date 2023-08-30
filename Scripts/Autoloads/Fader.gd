@@ -23,13 +23,17 @@ func set_transparent(value: bool):
 		color.modulate = Color.TRANSPARENT if value else Color.WHITE
 
 
-## Fade in direto.
-func fade_in():
+## Fade in direto. É possível atrasar o início.
+func fade_in(delay := 0.0):
+	if delay > 0:
+		await get_tree().create_timer(delay).timeout
 	_fade(true)
 
 
-## Fade out direto.
-func fade_out():
+## Fade out direto. É possível atrasar o início.
+func fade_out(delay := 0.0):
+	if delay > 0:
+		await get_tree().create_timer(delay).timeout
 	_fade(false)
 
 
