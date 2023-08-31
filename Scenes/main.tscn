@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://do7w7uen2kgw4"]
+[gd_scene load_steps=7 format=3 uid="uid://do7w7uen2kgw4"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_v4j20"]
 [ext_resource type="PackedScene" uid="uid://sv26t4bdy5le" path="res://Actors/bg.tscn" id="2_8rc0c"]
 [ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Actors/world_boundary.tscn" id="3_0xe63"]
 [ext_resource type="PackedScene" uid="uid://c7uh2kt5rldlt" path="res://Actors/player.tscn" id="4_prqjn"]
+[ext_resource type="PackedScene" uid="uid://dy1odsgouku0t" path="res://Actors/Enemy.tscn" id="5_wey6r"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_5oi1e"]
+vertices = PackedVector2Array(16, 11, 494, 8, 497, 273, 13, 264)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(16, 11, 494, 8, 497, 273, 13, 264)])
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_v4j20")
@@ -33,3 +39,9 @@ deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
+
+[node name="Enemy" parent="." instance=ExtResource("5_wey6r")]
+position = Vector2(289, 164)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_5oi1e")
