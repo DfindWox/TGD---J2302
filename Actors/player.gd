@@ -15,6 +15,7 @@ signal life_changed ## Emitido quando o jogador perde/ganha vida.
 
 var is_active := true ## Define se a nave está ativa e pode receber comandos do jogador.
 var can_parry := true ## Emitido quando o jogador morre.
+var camera_offset := Vector2.ZERO ## Offset da câmera em movimento.
 
 @onready var parry_shape := $ParryArea/Collision as CollisionShape2D ## [CollisionShape2D] responsável pelo parry.
 @onready var shoot_delay_timer := $ShootDelay as Timer ## [Timer] que determina o tempo entre tiros.
@@ -53,6 +54,7 @@ func _move(_delta: float) -> void:
 	var new_vel = input_dir * speed
 	velocity = velocity.lerp(new_vel, direction_lerp)
 	move_and_slide()
+	var _c = move_and_collide(camera_offset)
 
 
 func _get_input_vector() -> Vector2:

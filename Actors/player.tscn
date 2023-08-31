@@ -11,6 +11,8 @@ radius = 16.1245
 radius = 19.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+process_priority = 5
+process_physics_priority = 5
 collision_mask = 54
 script = ExtResource("1_hr4d6")
 direction_lerp = 0.15
@@ -26,6 +28,7 @@ shape = SubResource("CircleShape2D_d2yxi")
 [node name="ParryArea" type="Area2D" parent="."]
 rotation = -0.00783381
 scale = Vector2(1.63998, 1.60186)
+collision_mask = 16
 
 [node name="Collision" type="CollisionShape2D" parent="ParryArea"]
 shape = SubResource("CircleShape2D_efixp")

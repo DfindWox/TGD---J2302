@@ -1,21 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://do7w7uen2kgw4"]
+[gd_scene load_steps=6 format=3 uid="uid://do7w7uen2kgw4"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_v4j20"]
 [ext_resource type="PackedScene" uid="uid://sv26t4bdy5le" path="res://Actors/bg.tscn" id="2_8rc0c"]
-[ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Actors/world_boundary.tscn" id="3_0xe63"]
+[ext_resource type="PackedScene" uid="uid://bnsuon1f0vhak" path="res://Actors/rail_camera.tscn" id="4_0vs36"]
 [ext_resource type="PackedScene" uid="uid://c7uh2kt5rldlt" path="res://Actors/player.tscn" id="4_prqjn"]
+
+[sub_resource type="Curve2D" id="Curve2D_gnjvr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 482, 274, 0, 0, 0, 0, 952, 271, 0, 0, 0, 0, 1368, 270, 0, 0, 0, 0, 1617, 528, 0, 0, 0, 0, 1973, 528)
+}
+point_count = 5
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_v4j20")
 
 [node name="BG" parent="." instance=ExtResource("2_8rc0c")]
 
-[node name="WorldBoundary" parent="." instance=ExtResource("3_0xe63")]
+[node name="Player" parent="." instance=ExtResource("4_prqjn")]
+position = Vector2(129, 271)
 
-[node name="PlayerNew" parent="." instance=ExtResource("4_prqjn")]
-position = Vector2(30, 270)
+[node name="CameraPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_gnjvr")
 
-[node name="Camera2D" type="Camera2D" parent="PlayerNew"]
+[node name="RailCamera" parent="CameraPath" instance=ExtResource("4_0vs36")]
+position = Vector2(482, 274)
+player_node = NodePath("../../Player")
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10

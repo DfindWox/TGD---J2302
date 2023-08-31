@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnsuon1f0vhak"]
+
+[ext_resource type="Script" path="res://Actors/rail_camera.gd" id="1_6qcdn"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mcttx"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hx3hg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pgbpj"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_aw8my"]
+normal = Vector2(-1, 0)
+
+[node name="RailCamera" type="PathFollow2D"]
+rotates = false
+loop = false
+script = ExtResource("1_6qcdn")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="ScreenLimits" type="StaticBody2D" parent="."]
+collision_layer = 32
+
+[node name="Top" type="CollisionShape2D" parent="ScreenLimits"]
+position = Vector2(0, -271)
+shape = SubResource("WorldBoundaryShape2D_mcttx")
+
+[node name="Down" type="CollisionShape2D" parent="ScreenLimits"]
+position = Vector2(0, 271)
+shape = SubResource("WorldBoundaryShape2D_hx3hg")
+
+[node name="Left" type="CollisionShape2D" parent="ScreenLimits"]
+position = Vector2(-482, 0)
+shape = SubResource("WorldBoundaryShape2D_pgbpj")
+
+[node name="Right" type="CollisionShape2D" parent="ScreenLimits"]
+position = Vector2(482, 0)
+shape = SubResource("WorldBoundaryShape2D_aw8my")
