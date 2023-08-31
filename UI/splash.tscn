@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://r8y3c1kno4mu"]
+
+[ext_resource type="Script" path="res://UI/splash.gd" id="1_b6al7"]
+[ext_resource type="Texture2D" uid="uid://bgm3w2vdl63k2" path="res://Assets/Images/logo_tgd.png" id="1_exs1u"]
+
+[node name="Splash" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b6al7")
+main_menu = "res://UI/main_menu.tscn"
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_exs1u")
+stretch_mode = 3

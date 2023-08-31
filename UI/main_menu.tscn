@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1pcdbcs02vxo"]
+
+[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_qpigh"]
+
+[sub_resource type="Gradient" id="Gradient_chi0b"]
+colors = PackedColorArray(0.34902, 0, 0.490196, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yq0pi"]
+gradient = SubResource("Gradient_chi0b")
+fill_from = Vector2(0.1, 0.1)
+fill_to = Vector2(0.926606, 0.706422)
+metadata/_snap_enabled = true
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s62o4"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qpigh")
+game_start_scene = "res://Scenes/main.tscn"
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_yq0pi")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.6
+texture = SubResource("PlaceholderTexture2D_s62o4")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.65
+anchor_right = 0.6
+anchor_bottom = 0.9
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Start" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Start"
+
+[node name="Credits" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="Buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Buttons/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]
