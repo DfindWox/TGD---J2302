@@ -14,7 +14,7 @@ signal life_changed ## Emitido quando o jogador perde/ganha vida.
 @export var shoot_delay := 0.3 ## Intervalo entre tiros.
 
 var is_active := true ## Define se a nave está ativa e pode receber comandos do jogador.
-var can_parry := true ## Emitido quando o jogador morre.
+var can_parry := true ## Para saber se o jogador está apto ao parry.
 var camera_offset := Vector2.ZERO ## Offset da câmera em movimento.
 
 @onready var parry_shape := $ParryArea/Collision as CollisionShape2D ## [CollisionShape2D] responsável pelo parry.
@@ -40,10 +40,10 @@ func _physics_process(delta: float) -> void:
 func hurt(value := 1) -> void:
 	if shield > 0:
 		shield -= min(value, shield)
-		shield_changed.emit()
+		shield_changed.emit(shield)
 	else:
 		life -= min(life, value)
-		life_changed.emit()
+		life_changed.emit(life)
 		if life <= 0:
 			_die()
 

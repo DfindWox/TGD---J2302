@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://do7w7uen2kgw4"]
+[gd_scene load_steps=7 format=3 uid="uid://do7w7uen2kgw4"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_v4j20"]
 [ext_resource type="PackedScene" uid="uid://sv26t4bdy5le" path="res://Actors/bg.tscn" id="2_8rc0c"]
 [ext_resource type="PackedScene" uid="uid://bnsuon1f0vhak" path="res://Actors/rail_camera.tscn" id="4_0vs36"]
 [ext_resource type="PackedScene" uid="uid://c7uh2kt5rldlt" path="res://Actors/player.tscn" id="4_prqjn"]
+[ext_resource type="PackedScene" uid="uid://b3pq403uuirth" path="res://UI/game_ui.tscn" id="5_inl8l"]
 
 [sub_resource type="Curve2D" id="Curve2D_gnjvr"]
 _data = {
@@ -26,19 +27,6 @@ curve = SubResource("Curve2D_gnjvr")
 position = Vector2(482, 274)
 player_node = NodePath("../../Player")
 
-[node name="UI" type="CanvasLayer" parent="."]
-layer = 10
-
-[node name="TextEdit" type="TextEdit" parent="UI"]
-offset_right = 129.0
-offset_bottom = 79.0
-text = "E- Parry
-R- Reset"
-editable = false
-context_menu_enabled = false
-shortcut_keys_enabled = false
-selecting_enabled = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
-virtual_keyboard_enabled = false
-middle_mouse_paste_enabled = false
+[node name="GameUI" parent="." instance=ExtResource("5_inl8l")]
+player_node = NodePath("../Player")
+camera_node = NodePath("../CameraPath/RailCamera")
