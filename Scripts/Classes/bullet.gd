@@ -2,26 +2,29 @@ extends Area2D
 
 signal bullet_destroyed
 
-@export var speed := 300.0
+@export var speed := 500.0
 
-var dir := Vector2.ZERO
+var dir := Vector2.ZERO ## Direção pra onde o tiro deve ir
 var has_launched := false ## Para saber se o tiro já saiu
+var camera_offset := Vector2.ZERO
 
 
 # Funções virtuais
 func _process(delta: float) -> void:
 	if has_launched:
 		global_position += dir * speed * delta
+		global_position += camera_offset
 
 
 # Funções públicas
 func launch(direction: Vector2) -> void:
-	if dir.is_zero_approx():
+	if direction.is_zero_approx():
 		push_error("Bullet received no direction")
 		return
 	else:
 		dir = direction
 		rotation = dir.angle()
+		has_launched = true
 
 
 # Funções privadas
