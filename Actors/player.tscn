@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Actors/player.gd" id="1_hr4d6"]
 [ext_resource type="Texture2D" uid="uid://75f8kxjjyac0" path="res://Assets/Sprites/ship_4.png" id="1_hs3ff"]
-[ext_resource type="PackedScene" uid="uid://c2hpuumh3akos" path="res://Actors/bullet.tscn" id="2_lpcuh"]
+[ext_resource type="PackedScene" uid="uid://c2hpuumh3akos" path="res://Actors/player_bullet.tscn" id="2_lpcuh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d2yxi"]
 radius = 16.1245
@@ -17,6 +17,7 @@ collision_mask = 54
 script = ExtResource("1_hr4d6")
 direction_lerp = 0.15
 bullet = ExtResource("2_lpcuh")
+shoot_delay = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

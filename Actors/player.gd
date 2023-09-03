@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		_move(delta)
 		if Input.is_action_just_pressed("Parry"):
 			_parry()
-		if Input.is_action_just_pressed("shoot"):
+		if Input.is_action_pressed("shoot"):
 			_shoot()
 
 
@@ -82,6 +82,7 @@ func _shoot() -> void:
 		var b := bullet.instantiate()
 		get_tree().current_scene.add_child(b)
 		b.global_position = shoot_point.global_position
+		b.launch(Vector2.RIGHT)
 		shoot_delay_timer.start()
 
 
