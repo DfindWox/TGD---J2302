@@ -61,7 +61,7 @@ func _on_shield_changed(new_shield : int) -> void:
 			counter.texture = SHIELD_INACTIVE
 
 
-func _on_life_changed(new_life : int) -> void:
+func _on_life_changed(_new_life : int) -> void:
 	pass
 
 
