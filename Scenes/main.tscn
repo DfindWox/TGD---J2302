@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_v4j20"]
 [ext_resource type="PackedScene" uid="uid://sv26t4bdy5le" path="res://Actors/bg.tscn" id="2_8rc0c"]
-[ext_resource type="PackedScene" uid="uid://bnsuon1f0vhak" path="res://Actors/rail_camera.tscn" id="4_0vs36"]
+[ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Actors/world_boundary.tscn" id="3_0xe63"]
 [ext_resource type="PackedScene" uid="uid://c7uh2kt5rldlt" path="res://Actors/player.tscn" id="4_prqjn"]
 [ext_resource type="PackedScene" uid="uid://b3pq403uuirth" path="res://UI/game_ui.tscn" id="5_inl8l"]
 
