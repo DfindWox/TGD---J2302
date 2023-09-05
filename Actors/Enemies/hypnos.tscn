@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://boi0hb6me6dlq"]
+
+[ext_resource type="PackedScene" uid="uid://dy1odsgouku0t" path="res://Scripts/Classes/base_enemy.tscn" id="1_y8r84"]
+[ext_resource type="Script" path="res://Actors/Enemies/hypnos.gd" id="2_ovlj8"]
+[ext_resource type="Texture2D" uid="uid://c4w0gfxfqqcvb" path="res://Assets/Sprites/ship_2.png" id="3_5iedy"]
+[ext_resource type="PackedScene" uid="uid://lh8rg3gc3m8m" path="res://Actors/EnemyPaths/hypnos_path.tscn" id="3_crpfw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ydgnw"]
+radius = 14.0
+height = 40.0
+
+[node name="Hypnos" instance=ExtResource("1_y8r84")]
+script = ExtResource("2_ovlj8")
+min_shoot_timer = 1.5
+max_shoot_timer = 2.0
+path_list = Array[PackedScene]([ExtResource("3_crpfw")])
+rotate_with_path = true
+bullet_scene = "res://Actors/enemy_bullet.tscn"
+
+[node name="Sprite" type="Sprite2D" parent="." index="0"]
+rotation = 1.5708
+texture = ExtResource("3_5iedy")
+
+[node name="Collision" parent="." index="1"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ydgnw")
+
+[node name="VisibleNotifier" parent="." index="3"]
+position = Vector2(-150, -2.38419e-06)
+scale = Vector2(5, 5)
+
+[node name="OffscreenTimer" parent="." index="4"]
+wait_time = 3.0
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="." index="5"]
+one_shot = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
