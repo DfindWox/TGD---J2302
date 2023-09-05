@@ -8,8 +8,9 @@ const SHIELD_INACTIVE = preload("res://Assets/Sprites/UI/shield_counter_empty.pn
 
 var object_under_count := 0 ## Contagem de objetos passando por baixo da UI.
 var hide_tween_time := 0.3 ## Tempo para a UI ficar transparente caso um objeto toque nela.
+var score := 0 ## O valor atual de score.
 
-@onready var score := $Screen/Score as Label ## Texto de score.
+@onready var score_node := $Screen/Score as Label ## Texto de score.
 @onready var shield_counters := $Screen/ShieldBG/ShieldCounters as HBoxContainer ## [Container] dos contadores de shield.
 @onready var screen := $Screen as Control ## [Container] do visual compelto da UI.
 
@@ -65,8 +66,9 @@ func _on_life_changed(_new_life : int) -> void:
 	pass
 
 
-func _on_score_changed(new_score : int) -> void:
-	score.text = "SCORE: %07d" % new_score
+func _on_score_changed(added_score : int) -> void:
+	score += added_score
+	score_node.text = "SCORE: %07d" % score
 
 
 func _on_object_entered_ui() -> void:

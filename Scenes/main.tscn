@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://do7w7uen2kgw4"]
+[gd_scene load_steps=8 format=3 uid="uid://do7w7uen2kgw4"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_v4j20"]
 [ext_resource type="PackedScene" uid="uid://sv26t4bdy5le" path="res://Actors/bg.tscn" id="2_8rc0c"]
-[ext_resource type="PackedScene" uid="uid://bgm5lsyqscoli" path="res://Actors/world_boundary.tscn" id="3_0xe63"]
+[ext_resource type="PackedScene" uid="uid://bnsuon1f0vhak" path="res://Actors/rail_camera.tscn" id="4_myp7l"]
 [ext_resource type="PackedScene" uid="uid://c7uh2kt5rldlt" path="res://Actors/player.tscn" id="4_prqjn"]
 [ext_resource type="PackedScene" uid="uid://b3pq403uuirth" path="res://UI/game_ui.tscn" id="5_inl8l"]
+[ext_resource type="PackedScene" uid="uid://boi0hb6me6dlq" path="res://Actors/Enemies/hypnos.tscn" id="6_svoux"]
 
 [sub_resource type="Curve2D" id="Curve2D_gnjvr"]
 _data = {
@@ -23,10 +24,18 @@ position = Vector2(129, 271)
 [node name="CameraPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_gnjvr")
 
-[node name="RailCamera" parent="CameraPath" instance=ExtResource("4_0vs36")]
+[node name="RailCamera" parent="CameraPath" instance=ExtResource("4_myp7l")]
 position = Vector2(482, 274)
-player_node = NodePath("../../Player")
 
 [node name="GameUI" parent="." instance=ExtResource("5_inl8l")]
 player_node = NodePath("../Player")
 camera_node = NodePath("../CameraPath/RailCamera")
+
+[node name="Hypnos" parent="." instance=ExtResource("6_svoux")]
+position = Vector2(1168, 96)
+
+[node name="Hypnos2" parent="." instance=ExtResource("6_svoux")]
+position = Vector2(1184, 146)
+
+[node name="Hypnos3" parent="." instance=ExtResource("6_svoux")]
+position = Vector2(1200, 196)
