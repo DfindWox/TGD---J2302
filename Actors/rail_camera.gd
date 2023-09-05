@@ -3,7 +3,6 @@ extends PathFollow2D
 signal object_entered_ui
 signal object_exited_ui
 
-@export_node_path("CharacterBody2D") var player_node ## Caminho para o node do Player.
 @export var cam_speed := 50.0 ## Velocidade da câmera em pixels.
 
 var previous_pos := Vector2.ZERO ## Posição anterior da câmera, usada para calcular offset.
