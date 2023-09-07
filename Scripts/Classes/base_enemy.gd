@@ -8,25 +8,31 @@ extends CharacterBody2D
 
 signal enemy_destroyed(score: int)
 
-@export var speed: float = 210.0 ## Velocidade em pixels.
 @export var score: int
+@export var touch_damage: int
+@export_file("*.tscn") var bullet_scene
+@export_group("Movement")
+@export var speed: float = 210.0 ## Velocidade em pixels.
 @export var follow_camera := false
 @export var path_list: Array[PackedScene]
 @export var loop_paths := false
 @export var rotate_with_path := false
-@export_file("*.tscn") var bullet_scene
 
 var path: Path2D
 var path_follow: PathFollow2D
 var entered_screen := false
-var bullet
+var bullet: PackedScene
+var hitbox_touch := []
 
 @onready var shoot_point := $ShootPoint as Marker2D
 @onready var offscreen_timer := $OffscreenTimer as Timer
+@onready var enemy_collision := $Collision as CollisionShape2D
+@onready var hitbox_collision := $Hitbox/Collision as CollisionShape2D
 
 
 # Funções virtuais
 func _ready() -> void:
+	print(typeof(bullet_scene) == TYPE_STRING)
 	bullet = load(bullet_scene)
 	path_list = path_list.duplicate()
 	# Pra evitar que o inimigo tente acessar o Path2D antes de ele existir
@@ -38,6 +44,9 @@ func _physics_process(delta):
 	_move(delta)
 	if path_follow.progress_ratio == 1: # Se o caminho tiver terminado
 		_setup_next_path()
+	if hitbox_touch.size() > 0:
+		for target in hitbox_touch:
+			_hit(target)
 
 
 # Funções privadas
@@ -51,6 +60,8 @@ func _setup() -> void:
 	# Conectar o sinal à UI
 	var ui = get_tree().get_first_node_in_group("UI")
 	enemy_destroyed.connect(ui._on_score_changed.bind(score))
+	# Igualar a colisão do inimigo à hitbox (hack)
+	hitbox_collision.shape = enemy_collision.shape
 
 
 func _setup_next_path() -> void:
@@ -91,6 +102,10 @@ func _shoot(target: Vector2) -> void:
 	b.launch(target_dir)
 
 
+func _hit(target: Node2D) -> void:
+	target.hurt(touch_damage)
+
+
 func _on_screen_entered() -> void:
 	if not entered_screen:
 		entered_screen = true
@@ -105,3 +120,12 @@ func _on_screen_exited() -> void:
 
 func _on_offscreen_timer_timeout() -> void:
 	_remove()
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		hitbox_touch.append(body)
+
+
+func _on_hitbox_body_exited(body: Node2D) -> void:
+	hitbox_touch.erase(body)

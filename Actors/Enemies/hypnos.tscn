@@ -13,9 +13,9 @@ height = 40.0
 script = ExtResource("2_ovlj8")
 min_shoot_timer = 1.5
 max_shoot_timer = 2.0
+bullet_scene = "res://Actors/enemy_bullet.tscn"
 path_list = Array[PackedScene]([ExtResource("3_crpfw")])
 rotate_with_path = true
-bullet_scene = "res://Actors/enemy_bullet.tscn"
 
 [node name="Sprite" type="Sprite2D" parent="." index="0"]
 rotation = 1.5708
@@ -33,7 +33,7 @@ scale = Vector2(5, 5)
 wait_time = 3.0
 one_shot = true
 
-[node name="ShootTimer" type="Timer" parent="." index="5"]
+[node name="ShootTimer" type="Timer" parent="." index="6"]
 one_shot = true
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -5,6 +5,7 @@
 [node name="BaseEnemy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 8
+motion_mode = 1
 script = ExtResource("1_1dn3n")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -15,6 +16,13 @@ script = ExtResource("1_1dn3n")
 
 [node name="OffscreenTimer" type="Timer" parent="."]
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+
 [connection signal="screen_entered" from="VisibleNotifier" to="." method="_on_screen_entered"]
 [connection signal="screen_exited" from="VisibleNotifier" to="." method="_on_screen_exited"]
 [connection signal="timeout" from="OffscreenTimer" to="." method="_on_offscreen_timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
