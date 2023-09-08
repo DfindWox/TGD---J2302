@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvgwtmgle883c"]
+
+[ext_resource type="PackedScene" uid="uid://dy1odsgouku0t" path="res://Scripts/Classes/base_enemy.tscn" id="1_p2lmu"]
+[ext_resource type="Script" path="res://Actors/Enemies/insolito.gd" id="2_gx7nl"]
+[ext_resource type="Texture2D" uid="uid://dci4x3c4bqnys" path="res://Assets/Sprites/ship_3.png" id="3_cso7i"]
+[ext_resource type="PackedScene" uid="uid://cgotig27dv4kw" path="res://Actors/EnemyPaths/insolito_path.tscn" id="3_xewmh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ldaae"]
+radius = 13.0
+height = 36.0
+
+[node name="Insolito" instance=ExtResource("1_p2lmu")]
+rotation = 3.14159
+script = ExtResource("2_gx7nl")
+starting_offset = 0.0
+shoot_stop_time = 0.2
+life = 2
+bullet_scene = "res://Actors/enemy_bullet.tscn"
+bullet_damage = 1
+path_list = Array[PackedScene]([ExtResource("3_xewmh")])
+loop_paths = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+rotation = 1.5708
+texture = ExtResource("3_cso7i")
+
+[node name="Collision" parent="." index="1"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ldaae")
+
+[node name="VisibleNotifier" parent="." index="3"]
+position = Vector2(50, -4.37114e-06)
+
+[node name="ShootTimer" type="Timer" parent="." index="6"]
+one_shot = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://do7w7uen2kgw4"]
+[gd_scene load_steps=9 format=3 uid="uid://do7w7uen2kgw4"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_v4j20"]
 [ext_resource type="PackedScene" uid="uid://sv26t4bdy5le" path="res://Actors/bg.tscn" id="2_8rc0c"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c7uh2kt5rldlt" path="res://Actors/player.tscn" id="4_prqjn"]
 [ext_resource type="PackedScene" uid="uid://b3pq403uuirth" path="res://UI/game_ui.tscn" id="5_inl8l"]
 [ext_resource type="PackedScene" uid="uid://boi0hb6me6dlq" path="res://Actors/Enemies/hypnos.tscn" id="6_svoux"]
+[ext_resource type="PackedScene" uid="uid://cvgwtmgle883c" path="res://Actors/Enemies/insolito.tscn" id="7_r2d17"]
 
 [sub_resource type="Curve2D" id="Curve2D_gnjvr"]
 _data = {
@@ -39,3 +40,6 @@ position = Vector2(1184, 146)
 
 [node name="Hypnos3" parent="." instance=ExtResource("6_svoux")]
 position = Vector2(1200, 196)
+
+[node name="Insolito" parent="." instance=ExtResource("7_r2d17")]
+position = Vector2(1395, 271)
