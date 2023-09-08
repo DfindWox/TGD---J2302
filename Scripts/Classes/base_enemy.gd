@@ -22,6 +22,7 @@ signal enemy_destroyed(score: int)
 
 var path: Path2D
 var path_follow: PathFollow2D
+var path_count := 0
 var entered_screen := false
 var bullet: PackedScene
 var hitbox_touch := []
@@ -77,11 +78,14 @@ func _setup_next_path() -> void:
 	if path != null:
 		path.queue_free()
 	if path_list.size() > 0:
-		path = path_list.pop_front().instantiate() as Path2D
+		path = path_list[path_count].instantiate() as Path2D
 		get_parent().add_child(path)
 		path.global_position = global_position
 		path_follow = path.get_node("PathFollow2D")
 		path_follow.rotates = rotate_with_path
+		path_count = posmod(path_count + 1, path_list.size())
+		if path_count == 0 and not loop_paths:
+			_remove()
 	else:
 		_remove()
 
