@@ -97,6 +97,8 @@ func _move(delta: float) -> void:
 	move_and_slide()
 	if rotate_with_path:
 		rotation = path_follow.rotation
+	if path_follow.progress_ratio == 1:
+		print(name, "'s path has ended")
 
 
 func _remove(destroyed := false) -> void:
