@@ -7,9 +7,15 @@ signal bullet_destroyed
 var dir := Vector2.ZERO ## Direção pra onde o tiro deve ir
 var has_launched := false ## Para saber se o tiro já saiu
 var camera_offset := Vector2.ZERO
+var damage := 1
+var origin: CharacterBody2D
 
 
 # Funções virtuais
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+
+
 func _process(delta: float) -> void:
 	if has_launched:
 		global_position += dir * speed * delta
@@ -17,7 +23,7 @@ func _process(delta: float) -> void:
 
 
 # Funções públicas
-func launch(direction: Vector2) -> void:
+func launch(direction: Vector2, from: CharacterBody2D) -> void:
 	if direction.is_zero_approx():
 		push_error("Bullet received no direction")
 		return
@@ -25,12 +31,13 @@ func launch(direction: Vector2) -> void:
 		dir = direction
 		rotation = dir.angle()
 		has_launched = true
+		origin = from
 
 
 # Funções privadas
 func _hit(obj: Node2D) -> void:
 	if obj.has_method("hurt"):
-		obj.hurt()
+		obj.hurt(damage)
 		bullet_destroyed.emit()
 		queue_free()
 	elif _is_environment(obj):

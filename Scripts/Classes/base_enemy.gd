@@ -10,7 +10,9 @@ signal enemy_destroyed(score: int)
 
 @export var score: int
 @export var touch_damage: int
+@export var life := 1
 @export_file("*.tscn") var bullet_scene
+@export var bullet_damage: int
 @export_group("Movement")
 @export var speed: float = 210.0 ## Velocidade em pixels.
 @export var follow_camera := false
@@ -32,9 +34,6 @@ var hitbox_touch := []
 
 # Funções virtuais
 func _ready() -> void:
-	print(typeof(bullet_scene) == TYPE_STRING)
-	bullet = load(bullet_scene)
-	path_list = path_list.duplicate()
 	# Pra evitar que o inimigo tente acessar o Path2D antes de ele existir
 	set_physics_process(false)
 	_setup() # Em outra função pra não usar await dentro de _ready()
@@ -49,8 +48,17 @@ func _physics_process(delta):
 			_hit(target)
 
 
+# Funções públicas
+func hurt(value := 1) -> void:
+	life -= value
+	if life <= 0:
+		_remove(true)
+
+
 # Funções privadas
 func _setup() -> void:
+	bullet = load(bullet_scene)
+	path_list = path_list.duplicate()
 	# Carregar o Path2D e preencher as variáveis relacionadas
 	await get_parent().ready
 	if path_list.is_empty():
@@ -62,6 +70,7 @@ func _setup() -> void:
 	enemy_destroyed.connect(ui._on_score_changed.bind(score))
 	# Igualar a colisão do inimigo à hitbox (hack)
 	hitbox_collision.shape = enemy_collision.shape
+	hitbox_collision.rotation = enemy_collision.rotation
 
 
 func _setup_next_path() -> void:
@@ -99,7 +108,7 @@ func _shoot(target: Vector2) -> void:
 	get_parent().add_child(b)
 	b.global_position = shoot_point.global_position
 	var target_dir := (target - b.global_position).normalized()
-	b.launch(target_dir)
+	b.launch(target_dir, self)
 
 
 func _hit(target: Node2D) -> void:

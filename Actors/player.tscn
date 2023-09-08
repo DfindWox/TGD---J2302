@@ -30,10 +30,10 @@ shape = SubResource("CircleShape2D_d2yxi")
 rotation = -0.00783381
 scale = Vector2(1.63998, 1.60186)
 collision_mask = 16
+monitoring = false
 
 [node name="Collision" type="CollisionShape2D" parent="ParryArea"]
 shape = SubResource("CircleShape2D_efixp")
-disabled = true
 debug_color = Color(0, 0.65098, 0.0392157, 0.419608)
 
 [node name="ShootDelay" type="Timer" parent="."]
@@ -42,3 +42,5 @@ one_shot = true
 
 [node name="ShootPoint" type="Marker2D" parent="."]
 position = Vector2(8, 0)
+
+[connection signal="area_entered" from="ParryArea" to="." method="_on_parry_area_entered"]
