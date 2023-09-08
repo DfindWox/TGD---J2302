@@ -18,5 +18,7 @@ func _on_screen_entered() -> void:
 
 
 func _on_shoot_timer_timeout() -> void:
-	var target = get_tree().get_first_node_in_group("Player").global_position
-	_shoot(target)
+	var player = get_tree().get_first_node_in_group("Player")
+	if player:
+		var target = player.global_position
+		_shoot(target)
