@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c2hpuumh3akos"]
 
 [ext_resource type="Texture2D" uid="uid://38oxgvvjm6kn" path="res://Assets/Sprites/shot.png" id="1_8p0ql"]
-[ext_resource type="Script" path="res://Scripts/Classes/bullet.gd" id="1_rtwgd"]
+[ext_resource type="Script" path="res://Actors/player_bullet.gd" id="1_rcmp8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_socnw"]
 radius = 5.0
@@ -47,7 +47,7 @@ _data = {
 [node name="PlayerBullet" type="Area2D" groups=["Bullet"]]
 collision_layer = 8
 collision_mask = 34
-script = ExtResource("1_rtwgd")
+script = ExtResource("1_rcmp8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 0.5)
@@ -62,3 +62,7 @@ hframes = 2
 libraries = {
 "": SubResource("AnimationLibrary_eui03")
 }
+
+[node name="VisibilityNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_visibility_notifier_screen_exited"]
