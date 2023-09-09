@@ -13,7 +13,10 @@ height = 40.0
 script = ExtResource("2_ovlj8")
 min_shoot_timer = 1.5
 max_shoot_timer = 2.0
+score = 100
+touch_damage = 1
 bullet_scene = "res://Actors/enemy_bullet.tscn"
+bullet_damage = 1
 path_list = Array[PackedScene]([ExtResource("3_crpfw")])
 rotate_with_path = true
 
