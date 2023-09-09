@@ -38,21 +38,8 @@ func launch(direction: Vector2, from: CharacterBody2D) -> void:
 func _hit(obj: Node2D) -> void:
 	if obj.has_method("hurt"):
 		obj.hurt(damage)
-		bullet_destroyed.emit()
-		queue_free()
-	elif _is_environment(obj):
-		bullet_destroyed.emit()
-		queue_free()
-	else:
-		push_error("Unexpected object hit: ", obj.name)
-
-
-#Funções auxiliares
-func _is_environment(obj: CollisionObject2D) -> bool:
-	if obj.get_collision_layer_value(6):
-		return true
-	else:
-		return false
+	bullet_destroyed.emit()
+	queue_free()
 
 
 # Funções de sinal
