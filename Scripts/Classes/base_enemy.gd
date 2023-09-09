@@ -17,6 +17,7 @@ signal enemy_destroyed(score: int)
 @export var speed: float = 210.0 ## Velocidade em pixels.
 @export var follow_camera := false
 @export var path_list: Array[PackedScene]
+@export var path_size_variation := Vector2(1.0, 1.0)
 @export var loop_paths := false
 @export var rotate_with_path := false
 
@@ -80,12 +81,11 @@ func _setup_next_path() -> void:
 	if path_list.size() > 0:
 		path = path_list[path_count].instantiate() as Path2D
 		get_parent().add_child(path)
+		path.scale = path_size_variation
 		path.global_position = global_position
 		path_follow = path.get_node("PathFollow2D")
 		path_follow.rotates = rotate_with_path
 		path_count = posmod(path_count + 1, path_list.size())
-		if path_count == 0 and not loop_paths:
-			_remove()
 	else:
 		_remove()
 
@@ -98,7 +98,8 @@ func _move(delta: float) -> void:
 	if rotate_with_path:
 		rotation = path_follow.rotation
 	if path_follow.progress_ratio == 1:
-		print(name, "'s path has ended")
+		if path_count == 0 and not loop_paths:
+			_remove()
 
 
 func _remove(destroyed := false) -> void:
