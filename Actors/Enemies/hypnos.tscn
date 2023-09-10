@@ -29,8 +29,8 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ydgnw")
 
 [node name="VisibleNotifier" parent="." index="3"]
-position = Vector2(-150, -2.38419e-06)
-scale = Vector2(5, 5)
+position = Vector2(0, 7.62939e-06)
+scale = Vector2(10, 10)
 
 [node name="OffscreenTimer" parent="." index="4"]
 wait_time = 3.0

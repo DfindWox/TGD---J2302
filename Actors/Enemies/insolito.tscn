@@ -31,7 +31,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ldaae")
 
 [node name="VisibleNotifier" parent="." index="3"]
-position = Vector2(50, -4.37114e-06)
+scale = Vector2(10, 10)
 
 [node name="ShootTimer" type="Timer" parent="." index="6"]
 one_shot = true

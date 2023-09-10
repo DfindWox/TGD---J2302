@@ -13,6 +13,7 @@ signal enemy_destroyed(score: int)
 @export var life := 1
 @export_file("*.tscn") var bullet_scene
 @export var bullet_damage: int
+@export var activation_delay := 0.0
 @export_group("Movement")
 @export var speed: float = 210.0 ## Velocidade em pixels.
 @export var follow_camera := false
@@ -125,6 +126,7 @@ func _hit(target: Node2D) -> void:
 func _on_screen_entered() -> void:
 	if not entered_screen:
 		entered_screen = true
+		await get_tree().create_timer(activation_delay).timeout
 		set_physics_process(true)
 	else:
 		offscreen_timer.stop()
