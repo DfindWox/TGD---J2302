@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://22t6f1kqy7ye"]
+
+[sub_resource type="Curve2D" id="Curve2D_6xhnf"]
+_data = {
+"points": PackedVector2Array(99, 109, 99, -109, 0, 0, -37, -56, 37, 56, 230, 0, -162, 219, 162, -219, 520, 0, -124.6, -148.385, 124.6, 148.385, 1190, -10)
+}
+point_count = 4
+
+[node name="HypnosPath" type="Path2D"]
+position = Vector2(960, 270)
+curve = SubResource("Curve2D_6xhnf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotation = -2.30815
+rotates = false
+loop = false
