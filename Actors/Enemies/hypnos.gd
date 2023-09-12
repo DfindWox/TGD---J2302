@@ -12,9 +12,18 @@ func _ready() -> void:
 
 
 func _on_screen_entered() -> void:
-	if not entered_screen:
-		shoot_timer.start()
 	super._on_screen_entered()
+	print(name, " is processing")
+	if shoot_timer.paused:
+		shoot_timer.paused = false
+	else:
+		shoot_timer.start()
+
+
+func _on_screen_exited() -> void:
+	super._on_screen_exited()
+	if not shoot_timer.is_stopped():
+		shoot_timer.paused = true
 
 
 func _on_shoot_timer_timeout() -> void:

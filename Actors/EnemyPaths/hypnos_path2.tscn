@@ -2,12 +2,12 @@
 
 [sub_resource type="Curve2D" id="Curve2D_6xhnf"]
 _data = {
-"points": PackedVector2Array(99, 109, 99, -109, 0, 0, -37, -56, 37, 56, 230, 0, -162, 219, 162, -219, 520, 0, -124.6, -148.385, 124.6, 148.385, 1190, -10)
+"points": PackedVector2Array(99, 109, 99, -109, 0, 0, -37, -56, 37, 56, 440, -10, -162, 219, 162, -219, 970, 0, -124.6, -148.385, 124.6, 148.385, 1850, 0)
 }
 point_count = 4
 
 [node name="HypnosPath" type="Path2D"]
-position = Vector2(960, 270)
+position = Vector2(0, 270)
 curve = SubResource("Curve2D_6xhnf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]

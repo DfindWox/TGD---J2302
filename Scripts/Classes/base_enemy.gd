@@ -33,6 +33,7 @@ var hitbox_touch := []
 @onready var offscreen_timer := $OffscreenTimer as Timer
 @onready var enemy_collision := $Collision as CollisionShape2D
 @onready var hitbox_collision := $Hitbox/Collision as CollisionShape2D
+@onready var vis_notifier := $VisibleNotifier as VisibleOnScreenNotifier2D
 
 
 # Funções virtuais
@@ -112,6 +113,7 @@ func _remove(destroyed := false) -> void:
 
 
 func _shoot(target: Vector2) -> void:
+	print(name, " shooting")
 	var b := bullet.instantiate() as Area2D
 	get_parent().add_child(b)
 	b.global_position = shoot_point.global_position
@@ -133,7 +135,10 @@ func _on_screen_entered() -> void:
 
 
 func _on_screen_exited() -> void:
-	offscreen_timer.start()
+	if not is_physics_processing():
+		entered_screen = false
+	else:
+		offscreen_timer.start()
 
 
 func _on_offscreen_timer_timeout() -> void:
