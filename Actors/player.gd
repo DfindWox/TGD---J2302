@@ -53,7 +53,9 @@ func hurt(value := 1) -> void:
 		if life <= 0:
 			_die()
 			return
+	modulate.a = 0.5
 	await get_tree().create_timer(invincibility_time).timeout
+	modulate.a = 1.0
 	is_invincible = false
 
 
